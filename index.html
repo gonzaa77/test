@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Arcade de Minijuegos 🎮</title>
+  <style>
+    /* Estilos Generales */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Encabezado / Banner */
+    header {
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      padding: 2.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Contenedor Principal */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      flex: 1;
+    }
+
+    /* Cuadrícula de Juegos */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Tarjetas de Juego */
+    .game-card {
+      background-color: #1e293b;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3);
+    }
+
+    .game-thumb {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      background-color: #334155;
+    }
+
+    .game-info {
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .game-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #38bdf8;
+    }
+
+    .game-desc {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+
+    .btn-play {
+      background-color: #22c55e;
+      color: #ffffff;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-play:hover {
+      background-color: #16a34a;
+    }
+
+    /* Modal / Pantalla para Jugar */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      background-color: #1e293b;
+      width: 100%;
+      max-width: 900px;
+      height: 85vh;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .modal-header {
+      padding: 1rem;
+      background-color: #0f172a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .close-btn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .close-btn:hover {
+      background: #dc2626;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Pie de página */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #0f172a;
+      color: #64748b;
+      border-top: 1px solid #1e293b;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header>
+    <h1>🕹️ Mi Arcade de Minijuegos</h1>
+    <p>¡Elige un juego y diviértete gratis directamente en tu navegador!</p>
+  </header>
+
+  <!-- Catálogo de Juegos -->
+  <main>
+    <div class="games-grid">
+      
+      <!-- Juego 1 -->
+      <div class="game-card">
+        <img src="https://via.placeholder.com/300x160/a855f7/ffffff?text=Minijuego+1" alt="Juego 1" class="game-thumb">
+        <div class="game-info">
+          <div class="game-title">Nombre del Juego 1</div>
+          <div class="game-desc">Una breve descripción de qué trata este minijuego y cómo se juega.</div>
+          <!-- Reemplaza "ruta-del-juego/index.html" por la carpeta o enlace a tu minijuego -->
+          <button class="btn-play" onclick="openGame('ruta-del-juego-1/index.html', 'Nombre del Juego 1')">¡Jugar Ahora!</button>
+        </div>
+      </div>
+
+      <!-- Juego 2 -->
+      <div class="game-card">
+        <img src="https://via.placeholder.com/300x160/38bdf8/ffffff?text=Minijuego+2" alt="Juego 2" class="game-thumb">
+        <div class="game-info">
+          <div class="game-title">Nombre del Juego 2</div>
+          <div class="game-desc">Pon a prueba tus reflejos en este divertido desafío rápido.</div>
+          <button class="btn-play" onclick="openGame('ruta-del-juego-2/index.html', 'Nombre del Juego 2')">¡Jugar Ahora!</button>
+        </div>
+      </div>
+
+      <!-- Juego 3 -->
+      <div class="game-card">
+        <img src="https://via.placeholder.com/300x160/22c55e/ffffff?text=Minijuego+3" alt="Juego 3" class="game-thumb">
+        <div class="game-info">
+          <div class="game-title">Nombre del Juego 3</div>
+          <div class="game-desc">Resuelve acertijos y supera los niveles más complejos.</div>
+          <button class="btn-play" onclick="openGame('ruta-del-juego-3/index.html', 'Nombre del Juego 3')">¡Jugar Ahora!</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Ventana emergente para cargar los juegos -->
+  <div id="gameModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Cargando juego...</h2>
+        <button class="close-btn" onclick="closeGame()">❌ Cerrar</button>
+      </div>
+      <iframe id="gameFrame" src=""></iframe>
+    </div>
+  </div>
+
+  <!-- Pie de página -->
+  <footer>
+    <p>&copy; 2026 Mi Sitio de Minijuegos — Creado con ❤️ para jugar en línea.</p>
+  </footer>
+
+  <!-- Lógica para abrir/cerrar juegos -->
+  <script>
+    function openGame(url, title) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('gameFrame').src = url;
+      document.getElementById('gameModal').style.display = 'flex';
+    }
+
+    function closeGame() {
+      document.getElementById('gameModal').style.display = 'none';
+      document.getElementById('gameFrame').src = ''; // Detiene el sonido/juego al cerrar
+    }
+  </script>
+
+</body>
+</html>
